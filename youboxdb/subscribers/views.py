@@ -10,7 +10,7 @@ from django.http import Http404
 
 class UserList(APIView):
     def get(self, request):
-        user = User.objects.all()
+        user = NewUser.objects.all()
         serializer = UserSerializer(user, many=True)
         return Response(serializer.data)
 
@@ -26,13 +26,13 @@ class UserDetail(APIView):
 
     def get_object(self, username):
         try:
-            return User.objects.get(username=username)
-        except User.DoesNotExist:
+            return NewUser.objects.get(username=username)
+        except NewUser.DoesNotExist:
             raise Http404
 
     def get(self, request, username):
         user = self.get_object(username)
-        serializer = UserSerializer(user, many=True)
+        serializer = UserSerializer(user)
         return Response(serializer.data)
 
 #Updating user with an image requires form data right?
