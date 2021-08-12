@@ -13,7 +13,7 @@ class RoleSerializer(serializers.ModelSerializer):
 class PostUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'role', 'email', 'street_address', 'city', 'state', 'zip_code', 'phone']
+        fields = ['id', 'role', 'image_Id', 'email', 'street_address', 'city', 'state', 'zip_code', 'phone']
 
 
 #use on get request
@@ -36,7 +36,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'role', 'email', 'street_address', 'city', 'state', 'zip_code', 'phone']
+        fields = ['id', 'role', 'image_Id', 'email', 'street_address', 'city', 'state', 'zip_code', 'phone']
 
 
 #Use to Post,Put or Delete
