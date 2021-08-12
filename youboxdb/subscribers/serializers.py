@@ -1,6 +1,9 @@
 from rest_framework import serializers
 from .models import *
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class RoleSerializer(serializers.ModelSerializer):
@@ -13,21 +16,21 @@ class RoleSerializer(serializers.ModelSerializer):
 class PostUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'role', 'image_Id', 'email', 'street_address', 'city', 'state', 'zip_code', 'phone']
+        fields = ['id', 'role', 'image_Id', 'email', 'street_Address', 'city', 'state', 'zip_Code', 'phone']
 
 
 #use on get request
 class UtokenSerializer(serializers.ModelSerializer):
     class Meta:
         model = Utoken
-        fields = ['id', 'user_id']
+        fields = ['id', 'user_Id']
 
 
 #Use to Post,Put or Delete
 class PostUtokenSerializer(serializers.ModelSerializer):
     class Meta:
         model = Utoken
-        fields = ['id', 'user_id']
+        fields = ['id', 'user_Id']
 
 
 #use on get request
@@ -36,28 +39,28 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'role', 'image_Id', 'email', 'street_address', 'city', 'state', 'zip_code', 'phone']
+        fields = ['id', 'role', 'image_Id', 'email', 'street_Address', 'city', 'state', 'zip_Code', 'phone']
 
 
 #Use to Post,Put or Delete
 class PostClothingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Clothing
-        fields = ['id', 'image_id', 'user_id', 'city', 'type', 'brand', 'style', 'material', 'pattern', 'size', 'color']
+        fields = ['id', 'image_Id', 'user_Id', 'city', 'type', 'brand', 'style', 'material', 'pattern', 'size', 'color']
 
 
 #use on get request
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
-        fields = ['id', 'user_id', 'item_id', 'image']
+        fields = ['id', 'user_Id', 'item_Id', 'image']
 
 
 #use on post, put or delete
 class PostImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
-        fields = ['id', 'user_id', 'item_id', 'image']
+        fields = ['id', 'user_Id', 'item_Id', 'image']
 
 
 #use on get request
@@ -66,21 +69,21 @@ class ClothingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Clothing
-        fields = ['id', 'image_id', 'user_id', 'city', 'type', 'brand', 'style', 'material', 'pattern', 'size', 'color']
+        fields = ['id', 'image_Id', 'user_Id', 'city', 'type', 'brand', 'style', 'material', 'pattern', 'size', 'color']
 
 
 #use on get request
 class SubscriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subscription
-        fields = ['id', 'user_id', 'name', 'number_items', 'price', 'delivery_freq']
+        fields = ['id', 'user_Id', 'name', 'number_Items', 'price', 'delivery_Freq']
 
 
 #Use to Post,Put or Delete
 class PostSubscriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subscription
-        fields = ['id', 'user_id', 'name', 'number_items', 'price', 'delivery_freq']
+        fields = ['id', 'user_Id', 'name', 'number_Items', 'price', 'delivery_Freq']
 
 
 #use on get request
@@ -91,13 +94,13 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['id', 'user_id', 'subscription_id', 'clothing_items', 'total', 'est_delivery']
+        fields = ['id', 'user_Id', 'subscription_Id', 'clothing_Items', 'total', 'est_Delivery']
 
 
 #Use to Post,Put or Delete
 class PostOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
-        fields = ['id', 'user_id', 'subscription_id', 'clothing_items', 'total', 'est_delivery']
+        fields = ['id', 'user_Id', 'subscription_Id', 'clothing_Items', 'total', 'est_Delivery']
 
 

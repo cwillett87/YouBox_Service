@@ -18,9 +18,6 @@ class User(AbstractUser):
     phone = models.BigIntegerField(blank=True, null=True)
     REQUIRED_FIELDS = ['email', 'first_name', 'last_name', 'role', 'street_Address', 'city', 'state', 'zip_Code', 'phone']
 
-    def get_username(self):
-        return self.email
-
 
 class Utoken(models.Model):
     user_Id = models.ForeignKey('subscribers.User', null=True, on_delete=models.CASCADE)
