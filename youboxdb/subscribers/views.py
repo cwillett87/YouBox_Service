@@ -10,7 +10,7 @@ from django.http import Http404
 
 class UserList(APIView):
     def get(self, request):
-        user = NewUser.objects.all()
+        user = User.objects.all()
         serializer = UserSerializer(user, many=True)
         return Response(serializer.data)
 
@@ -26,8 +26,8 @@ class UserDetail(APIView):
 
     def get_object(self, username):
         try:
-            return NewUser.objects.get(username=username)
-        except NewUser.DoesNotExist:
+            return User.objects.get(username=username)
+        except User.DoesNotExist:
             raise Http404
 
     def get(self, request, username):

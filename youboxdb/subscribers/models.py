@@ -8,7 +8,6 @@ class Role(models.Model):
     type = models.CharField(primary_key=True, max_length=50)
 
 
-#Austin please go over this model and its setup for djoser, but we have note installed or setup in settings.  implement for django
 class User(AbstractUser):
     role = models.ForeignKey('subscribers.Role', null=True, on_delete=models.CASCADE)
     image_Id = models.ForeignKey('subscribers.Image', null=True, on_delete=models.CASCADE)
