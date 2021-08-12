@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'subscribers.apps.SubscribersConfig'
+    'subscribers.apps.SubscribersConfig',
 ]
 
 MIDDLEWARE = [
@@ -69,9 +69,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'youboxdb.wsgi.application'
-
-
-
 
 
 # Password validation
