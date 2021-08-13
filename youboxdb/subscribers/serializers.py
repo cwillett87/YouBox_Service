@@ -46,7 +46,7 @@ class UserSerializer(serializers.ModelSerializer):
 class PostClothingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Clothing
-        fields = ['id', 'image_Id', 'user_Id', 'city', 'type', 'brand', 'style', 'material', 'pattern', 'size', 'color']
+        fields = ['id', 'image_Id', 'user_Id', 'type', 'brand', 'style', 'material', 'pattern', 'size', 'color']
 
 
 #use on get request
@@ -65,11 +65,11 @@ class PostImageSerializer(serializers.ModelSerializer):
 
 #use on get request
 class ClothingSerializer(serializers.ModelSerializer):
-    image = ImageSerializer(read_only=True)#includes image on get
+    image_Id = ImageSerializer(read_only=True)#includes image on get
 
     class Meta:
         model = Clothing
-        fields = ['id', 'image_Id', 'user_Id', 'image', 'city', 'type', 'brand', 'style', 'material', 'pattern', 'size', 'color']
+        fields = ['id', 'image_Id', 'user_Id', 'type', 'brand', 'style', 'material', 'pattern', 'size', 'color']
 
 
 #use on get request
@@ -88,13 +88,13 @@ class PostSubscriptionSerializer(serializers.ModelSerializer):
 
 #use on get request
 class OrderSerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True) #includes user on get
-    subscription = SubscriptionSerializer(read_only=True)#includes subscription on get
+    user_Id = UserSerializer(read_only=True) #includes user on get
+    subscription_Id = SubscriptionSerializer(read_only=True)#includes subscription on get
     clothing_Items = ClothingSerializer(read_only=True, many=True)#includes all clothing in get
 
     class Meta:
         model = Order
-        fields = ['id', 'user_Id', 'user', 'subscription', 'subscription_Id', 'clothing_Items', 'total', 'est_Delivery']
+        fields = ['id', 'user_Id', 'subscription_Id', 'clothing_Items', 'total', 'est_Delivery']
 
 
 #Use to Post,Put or Delete

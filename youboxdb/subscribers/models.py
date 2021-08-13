@@ -26,7 +26,6 @@ class Utoken(models.Model):
 class Clothing(models.Model):
     image_Id = models.ForeignKey('subscribers.Image', null=True, on_delete=models.CASCADE)
     user_Id = models.ForeignKey('subscribers.User', null=True, on_delete=models.CASCADE)
-    city = models.CharField(max_length=100)
     type = models.CharField(max_length=100)
     brand = models.CharField(max_length=100)
     style = models.CharField(max_length=100)
