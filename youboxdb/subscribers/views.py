@@ -32,13 +32,13 @@ class UserDetail(APIView):
 
     def get(self, request, username):
         user = self.get_object(username)
-        serializer = UserSerializer(user)
+        serializer = PostUserSerializer(user)
         return Response(serializer.data)
 
 #Updating user with an image requires form data right?
     def put(self, request, username):
         user = self.get_object(username)
-        serializer = UserSerializer(user, data=request.data)
+        serializer = PostUserSerializer(user, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -234,7 +234,7 @@ class OrderFilter(APIView):
 
     def get(self, request, user_Id):
         order = self.get_object(user_Id)
-        serializer = UtokenSerializer(order, many=True)
+        serializer = OrderSerializer(order, many=True)
         return Response(serializer.data)
 
 
