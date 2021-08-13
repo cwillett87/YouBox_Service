@@ -1,3 +1,6 @@
+from rest_framework.exceptions import ParseError
+from rest_framework.utils import json
+
 from .models import *
 from .serializers import *
 from rest_framework.views import APIView
@@ -245,12 +248,13 @@ class ImageList(APIView):
         serializer = ImageSerializer(image, many=True)
         return Response(serializer.data)
 
-    def post(self, request):
-        serializer = PostImageSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def post(self, request, *args, **kwargs):
+        try:
+            file = request.data['file']
+        except KeyError:
+            raise ParseError('Request has no resource file attached')
+        image = Image.objects.create(image=file)
+        return Response(json.dumps({'message': "Uploaded"}), status=200)
 
 
 class ImageDetail(APIView):
@@ -265,6 +269,14 @@ class ImageDetail(APIView):
         image = self.get_object(pk)
         serializer = ImageSerializer(image)
         return Response(serializer.data)
+
+    def put(self, request, pk):
+        image = self.get_object(pk)
+        serializer = ImageSerializer(image, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
         image = self.get_object(pk)

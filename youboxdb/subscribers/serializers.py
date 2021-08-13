@@ -34,12 +34,19 @@ class PostUtokenSerializer(serializers.ModelSerializer):
 
 
 #use on get request
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
+        fields = ['id', 'user_Id', 'item_Id', 'name', 'image']
+
+
+#use on get request
 class UserSerializer(serializers.ModelSerializer):
-    token = UtokenSerializer(read_only=True)#includes upgrade tokens on get
+    image_Id = ImageSerializer(read_only=True)
 
     class Meta:
         model = User
-        fields = ['id', 'first_name', 'last_name', 'username', 'password', 'token', 'role', 'image_Id', 'email', 'street_Address', 'city', 'state', 'zip_Code', 'phone']
+        fields = ['id', 'first_name', 'last_name', 'username', 'password', 'role', 'image_Id', 'email', 'street_Address', 'city', 'state', 'zip_Code', 'phone']
 
 
 #Use to Post,Put or Delete
@@ -49,18 +56,11 @@ class PostClothingSerializer(serializers.ModelSerializer):
         fields = ['id', 'image_Id', 'user_Id', 'type', 'brand', 'style', 'material', 'pattern', 'size', 'color']
 
 
-#use on get request
-class ImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Image
-        fields = ['id', 'user_Id', 'item_Id', 'image']
-
-
 #use on post, put or delete
 class PostImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
-        fields = ['id', 'user_Id', 'item_Id', 'image']
+        fields = ['id', 'user_Id', 'item_Id', 'name', 'image']
 
 
 #use on get request

@@ -35,11 +35,16 @@ class Clothing(models.Model):
     color = models.CharField(max_length=100)
 
 
+def imageFile(instance, filename):
+    return '/'.join(['images', filename])
+
+
 #setup static folder and image directory to store images
 class Image(models.Model):
     user_Id = models.ForeignKey('subscribers.User', null=True, on_delete=models.CASCADE)
     item_Id = models.ForeignKey('subscribers.Clothing', null=True, on_delete=models.CASCADE)
-    image = models.ImageField(null=True)
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to=imageFile, max_length=254, blank=True, null=True)
 
 
 class Subscription(models.Model):

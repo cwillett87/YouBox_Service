@@ -18,4 +18,5 @@ urlpatterns = [
     path('image-del/<int:pk>/', views.ImageDetail.as_view()),
     path('image-filter-item/<int:item_Id>/', views.ImageFilterItem.as_view()),
     path('image-filter-user/<int:user_Id>/', views.ImageFilterUser.as_view()),
+    path('upload/', views.ImageList.as_view(), name='upload')
 ]
