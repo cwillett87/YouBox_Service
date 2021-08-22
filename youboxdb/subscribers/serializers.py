@@ -12,7 +12,7 @@ class RoleSerializer(serializers.ModelSerializer):
         fields = ['id', 'type']
 
 
-#Use to Post,Put or Delete
+#Use to Post,Put
 class PostUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -26,7 +26,7 @@ class UtokenSerializer(serializers.ModelSerializer):
         fields = ['id', 'user_Id']
 
 
-#Use to Post,Put or Delete
+#Use to Post
 class PostUtokenSerializer(serializers.ModelSerializer):
     class Meta:
         model = Utoken
@@ -46,7 +46,8 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'first_name', 'last_name', 'username', 'password', 'role', 'image_Id', 'email', 'street_Address', 'city', 'state', 'zip_Code', 'phone']
+        fields = ['id', 'first_name', 'last_name', 'username', 'password', 'role', 'image_Id', 'email',
+                  'street_Address', 'city', 'state', 'zip_Code', 'phone']
 
 
 #Use to Post,Put or Delete

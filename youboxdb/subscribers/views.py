@@ -7,14 +7,31 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.http import Http404
+from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 
 
+class Logout(APIView):
+
+    def get_object(self, username):
+        try:
+            return User.objects.get(username=username)
+        except User.DoesNotExist:
+            raise Http404
+
+    def delete(self, request, username):
+        user = self.get_object(username)
+        user.auth_token.delete()
+        return Response(status=status.HTTP_200_OK)
+
+
 class UserList(APIView):
+
     def get(self, request):
         user = User.objects.all()
         serializer = UserSerializer(user, many=True)
+
         return Response(serializer.data)
 
     def post(self, request):
