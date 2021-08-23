@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+
+
 # Create your models here.
 
 
@@ -16,7 +18,7 @@ class User(AbstractUser):
     state = models.CharField(max_length=100)
     zip_Code = models.CharField(max_length=100)
     phone = models.BigIntegerField(blank=True, null=True)
-    REQUIRED_FIELDS = ['email', 'first_name', 'last_name', 'role', 'street_Address', 'city', 'state', 'zip_Code', 'phone']
+    REQUIRED_FIELDS = ['email', 'first_name', 'last_name', 'street_Address', 'city', 'state', 'zip_Code', 'phone']
 
 
 class Utoken(models.Model):

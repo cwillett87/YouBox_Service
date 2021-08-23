@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import *
-from django.contrib.auth.models import User
+
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -14,6 +14,24 @@ class RoleSerializer(serializers.ModelSerializer):
 
 #Use to Post,Put
 class PostUserSerializer(serializers.ModelSerializer):
+    def create(self, validated_data):
+        user = User(
+            email=validated_data['email'],
+            username=validated_data['username'],
+            first_name=validated_data['first_name'],
+            last_name=validated_data['last_name'],
+            role=validated_data['role'],
+            image_Id=validated_data['image_Id'],
+            street_Address=validated_data['street_Address'],
+            city=validated_data['city'],
+            state=validated_data['state'],
+            zip_Code=validated_data['zip_Code'],
+            phone=validated_data['phone'],
+        )
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
+
     class Meta:
         model = User
         fields = ['id', 'first_name', 'last_name', 'username', 'password', 'role', 'image_Id', 'email', 'street_Address', 'city', 'state', 'zip_Code', 'phone']

@@ -1,13 +1,13 @@
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.exceptions import ParseError
 from rest_framework.utils import json
-
-from .models import *
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
 from .serializers import *
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, permissions
 from django.http import Http404
-from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 
@@ -24,6 +24,14 @@ class Logout(APIView):
         user = self.get_object(username)
         user.auth_token.delete()
         return Response(status=status.HTTP_200_OK)
+
+
+class CustomObtainAuthToken(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        response = super(CustomObtainAuthToken, self).post(request, *args, **kwargs)
+        token = Token.objects.get(key=response.data['token'])
+        user = User.objects.get(id=token.user_id)
+        return Response({'token': token.key, 'user': PostUserSerializer(user).data})
 
 
 class UserList(APIView):
@@ -52,13 +60,13 @@ class UserDetail(APIView):
 
     def get(self, request, username):
         user = self.get_object(username)
-        serializer = PostUserSerializer(user)
+        serializer = UserSerializer(user)
         return Response(serializer.data)
 
 #Updating user with an image requires form data right?
     def put(self, request, username):
         user = self.get_object(username)
-        serializer = PostUserSerializer(user, data=request.data)
+        serializer = UserSerializer(user, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
