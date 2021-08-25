@@ -14,6 +14,7 @@ urlpatterns = [
     path('delete/<int:pk>/', UtokenDetail.as_view()),
     path('clothes/', ClothingList.as_view()),
     path('clothes/<int:pk>/', ClothingDetail.as_view()),
+    path('clothes-filter/<str:style>/', ClothingFilter.as_view()),
     path('sub/', SubscriptionList.as_view()),
     path('sub/<int:pk>/', SubscriptionDetail.as_view()),
     path('order/', OrderList.as_view()),

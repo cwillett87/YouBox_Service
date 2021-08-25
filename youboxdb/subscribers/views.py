@@ -141,6 +141,20 @@ class ClothingList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+
+class ClothingFilter(APIView):
+
+    def get_object(self, style):
+        try:
+            return Clothing.objects.filter(style=style)
+        except Clothing.DoesNotExist:
+            raise Http404
+
+    def get(self, request, style):
+        clothing = self.get_object(style)
+        serializer = ClothingSerializer(clothing, many=True)
+        return Response(serializer.data)
+
 class ClothingDetail(APIView):
 
     def get_object(self, pk):
